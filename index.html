@@ -173,15 +173,23 @@
   .hl-card p{color:var(--text-dim);font-size:14px;margin:0;}
 
   /* ---------- experience ---------- */
-  .exp-item{display:grid;grid-template-columns:180px 1fr;gap:32px;padding:32px 0;border-top:1px solid var(--border);}
-  .exp-item:last-child{border-bottom:1px solid var(--border);}
-  .exp-date{font-family:var(--font-mono);color:var(--cyan);font-size:13px;}
-  .exp-role{font-family:var(--font-display);font-size:20px;font-weight:600;margin-bottom:2px;}
-  .exp-org{color:var(--text-dim);font-size:14px;margin-bottom:16px;}
-  .exp-item ul{display:flex;flex-direction:column;gap:9px;}
-  .exp-item li{color:var(--text-dim);font-size:14.5px;padding-left:20px;position:relative;}
-  .exp-item li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
-  @media (max-width:700px){.exp-item{grid-template-columns:1fr;gap:8px;}}
+  .exp-card{background:var(--surface);border:1px solid var(--border-bright);border-radius:12px;padding:34px 36px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;}
+  .exp-card:hover{border-color:var(--cyan);transform:translateY(-3px);}
+  .exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),var(--amber));}
+  .exp-card-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+  .exp-role{font-family:var(--font-display);font-size:23px;font-weight:700;margin-bottom:5px;}
+  .exp-org{color:var(--text-dim);font-size:14.5px;}
+  .exp-card-head-right{display:flex;flex-direction:column;align-items:flex-end;gap:9px;}
+  .exp-status{font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:#5ce28a;background:rgba(92,226,138,0.1);border:1px solid rgba(92,226,138,0.35);padding:4px 11px;border-radius:20px;display:inline-flex;align-items:center;gap:7px;}
+  .exp-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#5ce28a;box-shadow:0 0 6px #5ce28a;animation:pulse-dot 2s infinite;}
+  .exp-date{font-family:var(--font-mono);color:var(--cyan);font-size:13px;font-weight:600;}
+  .exp-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+  .exp-list li{color:var(--text-dim);font-size:14.5px;padding-left:22px;position:relative;line-height:1.6;}
+  .exp-list li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
+  .exp-list strong{color:var(--cyan);font-weight:700;}
+  .exp-stack{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding-top:24px;border-top:1px solid var(--border);}
+  .exp-stack-label{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase;margin-right:4px;}
+  @media (max-width:700px){.exp-card{padding:28px 22px;}.exp-card-head-right{align-items:flex-start;}}
 
   /* ---------- pipeline ---------- */
   .pipeline{padding:100px 0;}
@@ -214,13 +222,23 @@
   .flip-face li::before{content:'▸';position:absolute;left:0;color:var(--amber);}
   .tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;}
   .tag{font-family:var(--font-mono);font-size:11px;padding:4px 9px;border-radius:4px;background:var(--surface-2);color:var(--text-dim);border:1px solid var(--border);}
-  .flip-hint{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);display:flex;align-items:center;gap:6px;margin-top:14px;cursor:pointer;}
-  .flip-hint:hover{color:var(--cyan);}
+  .flip-hint{
+    font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--cyan);
+    display:inline-flex;align-items:center;gap:8px;width:fit-content;
+    margin-top:16px;padding:9px 15px;border-radius:6px;cursor:pointer;
+    border:1px solid var(--cyan-dim);background:rgba(79,216,196,0.08);
+    transition:background .25s,border-color .25s,transform .25s,box-shadow .25s;
+    animation:hint-pulse 2.6s ease-in-out infinite;
+  }
+  .flip-hint::after{content:'→';transition:transform .25s;}
+  .flip-hint:hover{background:rgba(79,216,196,0.2);border-color:var(--cyan);transform:translateX(2px);box-shadow:0 6px 18px -6px var(--cyan-dim);animation-play-state:paused;}
+  .flip-hint:hover::after{transform:translateX(3px);}
+  @keyframes hint-pulse{0%,100%{box-shadow:0 0 0 0 var(--cyan-dim);}50%{box-shadow:0 0 0 5px transparent;}}
   .deploylog{font-family:var(--font-mono);font-size:11.5px;color:var(--cyan);line-height:1.9;flex:1;overflow:hidden;}
   .deploylog .dim{color:var(--text-faint);}
   .deploylog .ok{color:#5ce28a;}
-  .back-hint{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-top:auto;cursor:pointer;}
-  .back-hint:hover{color:var(--cyan);}
+  .back-hint{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-dim);display:inline-flex;align-items:center;gap:6px;width:fit-content;margin-top:auto;padding:8px 14px;border-radius:6px;cursor:pointer;border:1px solid var(--border-bright);transition:.25s;}
+  .back-hint:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(79,216,196,0.06);}
 
   /* ---------- skills ---------- */
   .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
@@ -230,25 +248,33 @@
   .skill-cat:hover{border-color:var(--border-bright);transform:translateY(-3px);}
   .skill-cat .num{font-family:var(--font-mono);color:var(--cyan);font-size:11px;letter-spacing:.08em;}
   .skill-cat h4{font-family:var(--font-display);font-size:15px;margin:6px 0 16px;}
-  .skillpills{display:flex;flex-wrap:wrap;gap:8px;}
+  .skillpills{display:flex;flex-wrap:wrap;gap:9px;}
   .skillpill{
-    font-family:var(--font-mono);font-size:12px;padding:6px 12px;border-radius:5px;
-    background:var(--surface-2);color:var(--text-dim);border:1px solid var(--border);
-    transition:border-color .25s,color .25s,transform .25s,box-shadow .25s;cursor:default;
+    font-family:var(--font-mono);font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:5px;
+    background:var(--surface-2);color:var(--text);border:1px solid var(--border-bright);
+    transition:border-color .25s,color .25s,background .25s,transform .25s,box-shadow .25s;cursor:default;
   }
-  .skillpill:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);box-shadow:0 6px 16px -6px var(--cyan-dim);}
+  .skillpill:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(79,216,196,0.1);transform:translateY(-2px);box-shadow:0 6px 16px -6px var(--cyan-dim);}
 
   /* ---------- credentials ---------- */
-  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
   @media (max-width:860px){.cred-grid{grid-template-columns:1fr;}}
-  .cred-block h4{font-family:var(--font-mono);color:var(--text-faint);font-size:12px;letter-spacing:.1em;margin-bottom:18px;}
-  .cred-card{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--border);}
-  .checkicon{flex-shrink:0;width:26px;height:26px;margin-top:2px;}
-  .checkicon circle{fill:none;stroke:var(--border-bright);stroke-width:2;}
-  .checkicon path{fill:none;stroke:var(--cyan);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .6s ease .3s;}
-  .in .checkicon path{stroke-dashoffset:0;}
-  .cred-card h5{font-family:var(--font-display);font-size:15px;margin-bottom:3px;}
-  .cred-card p{color:var(--text-dim);font-size:13px;}
+  .cred-panel{background:var(--surface);border:1px solid var(--border-bright);border-radius:10px;overflow:hidden;}
+  .cred-panel-head{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--border);background:var(--surface-2);}
+  .cred-panel-head h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);}
+  .cred-panel-head .count{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);border:1px solid var(--border-bright);padding:2px 9px;border-radius:20px;}
+  .cred-row{display:flex;gap:16px;padding:20px 22px;border-bottom:1px solid var(--border);position:relative;transition:background .25s;}
+  .cred-row:last-child{border-bottom:none;}
+  .cred-row:hover{background:rgba(255,255,255,0.02);}
+  .cred-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:background .25s;}
+  .cred-row:hover::before{background:var(--cyan);}
+  .cred-row-icon{flex-shrink:0;width:36px;height:36px;border-radius:8px;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;color:var(--text-dim);transition:color .25s,border-color .25s;}
+  .cred-row:hover .cred-row-icon{color:var(--cyan);border-color:var(--cyan);}
+  .cred-row-icon svg{width:18px;height:18px;}
+  .cred-row-body{flex:1;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .cred-row-body h5{font-family:var(--font-display);font-size:15px;font-weight:600;margin-bottom:3px;}
+  .cred-row-body .issuer{color:var(--text-dim);font-size:13px;}
+  .cred-row-meta{font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);white-space:nowrap;text-align:right;line-height:1.6;}
 
   /* ---------- contact ---------- */
   .contact-box{text-align:center;padding:70px 40px;border:1px solid var(--border-bright);border-radius:14px;background:radial-gradient(600px circle at 50% 0%,var(--cyan-dim),transparent 70%);position:relative;overflow:hidden;}
@@ -295,8 +321,8 @@
     <div class="hero-grid">
       <div>
         <div class="hero-kicker">$ whoami <span class="blinker"></span></div>
-        <h1>Hi, I'm Shivshankar.<br><span class="accent">DevOps Engineer.</span></h1>
-        <p class="lede">Specializing in AWS, Terraform, Docker &amp; Kubernetes — automating the path from commit to production so teams can ship with confidence.</p>
+        <h1>Hi, I'm Shivshankar.<br>I build <span class="accent">reliable infrastructure.</span></h1>
+        <p class="lede">DevOps Engineer specializing in AWS, Terraform, Docker &amp; Kubernetes — automating the path from commit to production so teams can ship with confidence.</p>
         <div class="btnrow">
           <a href="#contact" class="btn btn-primary magnetic">Let's Connect →</a>
           <a href="#" class="btn btn-ghost magnetic">Download Resume</a>
@@ -335,20 +361,30 @@
     <div class="eyebrow reveal">02 / Experience</div>
     <h2 class="title reveal">Where I've been building.</h2>
     <div class="reveal">
-      <div class="exp-item">
-        <div><div class="exp-date">FEB 2026 — PRESENT</div></div>
-        <div>
-          <div class="exp-role">DevOps Engineer</div>
-          <div class="exp-org">TejTatv InnoTech Private Limited · Pune, India</div>
-          <ul>
-            <li>Maintained development and deployment environments for applications using Docker and AWS infrastructure.</li>
-            <li>Designed and maintained GitHub Actions CI/CD workflows, reducing manual deployment effort by nearly 70%.</li>
-            <li>Containerized applications using Docker and optimized container build processes for consistent deployments.</li>
-            <li>Supported AWS infrastructure including EC2, IAM, VPC, Security Groups, and networking under technical supervision.</li>
-            <li>Performed Linux administration — process monitoring, service management, package management, troubleshooting.</li>
-            <li>Diagnosed deployment failures, container issues, networking problems, and application startup errors.</li>
-            <li>Created deployment documentation and operational runbooks to improve deployment consistency.</li>
-          </ul>
+      <div class="exp-card">
+        <div class="exp-card-head">
+          <div>
+            <div class="exp-role">DevOps Engineer</div>
+            <div class="exp-org">TejTatv InnoTech Private Limited · Pune, India</div>
+          </div>
+          <div class="exp-card-head-right">
+            <span class="exp-status">Active</span>
+            <span class="exp-date">FEB 2026 — PRESENT</span>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Maintained development and deployment environments for applications using Docker and AWS infrastructure.</li>
+          <li>Designed and maintained GitHub Actions CI/CD workflows, reducing manual deployment effort by nearly <strong>70%</strong>.</li>
+          <li>Containerized applications using Docker and optimized container build processes for consistent deployments.</li>
+          <li>Supported AWS infrastructure including EC2, IAM, VPC, Security Groups, and networking under technical supervision.</li>
+          <li>Performed Linux administration — process monitoring, service management, package management, troubleshooting.</li>
+          <li>Diagnosed deployment failures, container issues, networking problems, and application startup errors.</li>
+          <li>Created deployment documentation and operational runbooks to improve deployment consistency.</li>
+        </ul>
+        <div class="exp-stack">
+          <span class="exp-stack-label">Stack:</span>
+          <span class="skillpill">Docker</span><span class="skillpill">AWS</span><span class="skillpill">GitHub Actions</span>
+          <span class="skillpill">Linux</span><span class="skillpill">EC2</span><span class="skillpill">IAM</span><span class="skillpill">VPC</span>
         </div>
       </div>
     </div>
@@ -383,7 +419,7 @@
               <li>ALB health checks across ECS tasks.</li>
             </ul>
             <div class="tagrow"><span class="tag">ECS</span><span class="tag">Fargate</span><span class="tag">ECR</span><span class="tag">RDS</span><span class="tag">Terraform</span></div>
-            <div class="flip-hint">▸ view deploy log</div>
+            <div class="flip-hint">View deploy log</div>
           </div>
           <div class="flip-face back">
             <div class="deploylog">
@@ -415,7 +451,7 @@
               <li>Remote state via S3 + DynamoDB locking.</li>
             </ul>
             <div class="tagrow"><span class="tag">EC2</span><span class="tag">ALB</span><span class="tag">ASG</span><span class="tag">RDS</span><span class="tag">VPC</span></div>
-            <div class="flip-hint">▸ view deploy log</div>
+            <div class="flip-hint">View deploy log</div>
           </div>
           <div class="flip-face back">
             <div class="deploylog">
@@ -445,7 +481,7 @@
               <li>Observability via Prometheus and Grafana.</li>
             </ul>
             <div class="tagrow"><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">K3s</span><span class="tag">Prometheus</span></div>
-            <div class="flip-hint">▸ view deploy log</div>
+            <div class="flip-hint">View deploy log</div>
           </div>
           <div class="flip-face back">
             <div class="deploylog">
@@ -466,7 +502,7 @@
       <div class="flip-outer" data-flip>
         <div class="flip-inner">
           <div class="flip-face front proj-card">
-            <div class="proj-top"><h3>CI/CD Automation Pipeline</h3><a class="proj-link" href="https://github.com/gawalishankar" onclick="event.stopPropagation()">GitHub ↗</a></div>
+            <div class="proj-top"><h3>CI/CD Automation Pipeline</h3><a class="proj-link" href="https://github.com/gawalishankar/Jenkins-CICD-static-website" onclick="event.stopPropagation()">GitHub ↗</a></div>
             <p class="proj-desc">Automated build, validation, containerization, and deployment workflows using modern CI/CD practices.</p>
             <ul>
               <li>Automated Docker builds and registry publishing.</li>
@@ -474,7 +510,7 @@
               <li>Automated cloud deployment workflows.</li>
             </ul>
             <div class="tagrow"><span class="tag">GitHub Actions</span><span class="tag">Jenkins</span><span class="tag">Trivy</span></div>
-            <div class="flip-hint">▸ view deploy log</div>
+            <div class="flip-hint">View deploy log</div>
           </div>
           <div class="flip-face back">
             <div class="deploylog">
@@ -509,7 +545,7 @@
       <div class="skill-cat">
         <div class="num">02 / INFRASTRUCTURE</div><h4>Infrastructure as Code</h4>
         <div class="skillpills">
-          <span class="skillpill">Terraform</span>
+          <span class="skillpill">Terraform</span><span class="skillpill">CloudFormation</span>
         </div>
       </div>
       <div class="skill-cat">
@@ -544,17 +580,44 @@
   <section id="credentials" class="bg-rack">
     <div class="eyebrow reveal">05 / Credentials</div>
     <h2 class="title reveal">Education &amp; certifications.</h2>
-    <div class="cred-grid">
-      <div class="cred-block reveal">
-        <h4>EDUCATION</h4>
-        <div class="cred-card"><svg class="checkicon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12l3 3 7-7"/></svg><div><h5>Master of Computer Applications (MCA)</h5><p>Savitribai Phule Pune University · 2023–2025 · CGPA 7.35</p></div></div>
-        <div class="cred-card"><svg class="checkicon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12l3 3 7-7"/></svg><div><h5>Bachelor of Computer Applications (BCA)</h5><p>Swami Ramanand Teerth Marathwada University · 2021 · CGPA 8.88</p></div></div>
+    <div class="cred-grid reveal-stagger">
+
+      <div class="cred-panel">
+        <div class="cred-panel-head"><h4>Education</h4><span class="count">02</span></div>
+        <div class="cred-row">
+          <div class="cred-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
+          <div class="cred-row-body">
+            <div><h5>Master of Computer Applications (MCA)</h5><div class="issuer">Savitribai Phule Pune University</div></div>
+            <div class="cred-row-meta">2023–2025<br>CGPA 7.35</div>
+          </div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
+          <div class="cred-row-body">
+            <div><h5>Bachelor of Computer Applications (BCA)</h5><div class="issuer">Swami Ramanand Teerth Marathwada University</div></div>
+            <div class="cred-row-meta">2021<br>CGPA 8.88</div>
+          </div>
+        </div>
       </div>
-      <div class="cred-block reveal">
-        <h4>CERTIFICATIONS</h4>
-        <div class="cred-card"><svg class="checkicon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12l3 3 7-7"/></svg><div><h5>AWS Certified Cloud Practitioner (CLF-C02)</h5><p>Amazon Web Services</p></div></div>
-        <div class="cred-card"><svg class="checkicon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12l3 3 7-7"/></svg><div><h5>DevOps with AWS</h5><p>Skill Ridge</p></div></div>
+
+      <div class="cred-panel">
+        <div class="cred-panel-head"><h4>Certifications</h4><span class="count">02</span></div>
+        <div class="cred-row">
+          <div class="cred-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <div class="cred-row-body">
+            <div><h5>AWS Certified Cloud Practitioner</h5><div class="issuer">Amazon Web Services</div></div>
+            <div class="cred-row-meta">CLF-C02</div>
+          </div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <div class="cred-row-body">
+            <div><h5>DevOps with AWS</h5><div class="issuer">Skill Ridge</div></div>
+            <div class="cred-row-meta">&nbsp;</div>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
 
